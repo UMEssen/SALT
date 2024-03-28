@@ -2,7 +2,7 @@
 name = "SALT"
 version = "0.1.0"
 description = "Softmax for Arbitrary Label Trees (SALT) is a framework for training segmentation networks using conditional probabilities to model hierarchical relationships in the data."
-authors = ["Sven Koitka <sven.koitka@uni-due.de>", "Giulia Baldini <giulia.baldini@uni-due.de>", "René Hosch <rene.hosch@uk-essen.de>"]
+authors = ["SHIP AI <all.shipai@uk-essen.de>"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
