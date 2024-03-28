@@ -1,5 +1,8 @@
 # Softmax for Arbitrary Label Trees (SALT)
 
+This segmentation framework was developed at the Institute for AI in Medicine of the University Hospital Essen by the [SHIP-AI team](https://ship-ai.ikim.nrw/).
+The framework could be used for any 2D or 3D segmentation task that requires a hierarchical structure of the labels.
+In our case, we applied this to medical imaging and provide the segmentation of 145 different structures in the human body.
 
 ## Training
 
@@ -44,6 +47,8 @@ The datasets do not need to have all three `train`, `val`, and `test` folders, a
 
 The files `labels.txt` and `tree-labels.txt` specify the labels from the dataset. `labels.txt` should contain the label names, while `tree-labels.txt` should define the hierarchical structure of the labels from the tree. In the [labels](./labels) folder, you can find some examples for these files, and in the [conversion](salt/data/conversion) you can find examples on how the data was converted to this format.
 
+
+### Train
 Once the data is set up, you can build the docker image with
 ```bash
 docker build -t shipai/salt .
