@@ -1,0 +1,17 @@
+-
+liver
+right kidney
+spleen
+pancreas
+aorta
+inferior_vena_cava
+right adrenal gland
+left adrenal gland
+gallbladder
+esophagus
+stomach
+duodenum
+left kidney
+aorta abdominalis
+aorta thoracica
+vci pass abdominalis

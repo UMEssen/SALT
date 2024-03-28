@@ -1,0 +1,17 @@
+-
+liver
+spleen
+left kidney
+right kidney
+stomach
+gallbladder
+esophagus
+pancreas
+duodenum
+colon
+intestine
+adrenal glands
+rectum
+bladder
+left head of femur
+right head of femur

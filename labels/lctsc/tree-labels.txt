@@ -1,0 +1,6 @@
+-
+body,spinal_cord
+body,thoracic_cavity,lungs,lung_right
+body,thoracic_cavity,lungs,lung_left
+body,thoracic_cavity,mediastinum,pericardium
+-

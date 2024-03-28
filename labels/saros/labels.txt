@@ -1,0 +1,14 @@
+background
+subcutaneous tissue
+muscles
+abdominal cavity
+thoracic cavity
+bones
+parotid glands
+pericardium
+breast_implant
+mediastinum
+brain
+spinal cord
+thyroid glands
+submandibular glands

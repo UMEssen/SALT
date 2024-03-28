@@ -1,0 +1,17 @@
+-
+body,abdominal_cavity,liver
+body,abdominal_cavity,spleen
+body,abdominal_cavity,kidneys,kidney_left
+body,abdominal_cavity,kidneys,kidney_right
+body,abdominal_cavity,stomach
+body,abdominal_cavity,gallbladder
+-
+body,abdominal_cavity,pancreas
+body,abdominal_cavity,duodenum
+body,abdominal_cavity,colon
+body,abdominal_cavity,small_bowel
+body,abdominal_cavity,adrenal_glands
+-
+body,abdominal_cavity,urinary_bladder
+-
+-

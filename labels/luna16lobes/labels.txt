@@ -1,0 +1,7 @@
+-
+trachea
+upper_right
+middle_right
+lower_right
+upper_left
+lower_left

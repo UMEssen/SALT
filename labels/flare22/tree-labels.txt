@@ -1,0 +1,17 @@
+-
+body,abdominal_cavity,liver
+body,abdominal_cavity,kidneys,kidney_right
+body,abdominal_cavity,spleen
+body,abdominal_cavity,pancreas
+body,thoracic_cavity,mediastinum,aorta_thoracica_pass_mediastinum
+body,thoracic_cavity,mediastinum,vci_pass_thoracica
+body,abdominal_cavity,adrenal_glands,adrenal_gland_right
+body,abdominal_cavity,adrenal_glands,adrenal_gland_left
+body,abdominal_cavity,gallbladder
+-
+body,abdominal_cavity,stomach
+body,abdominal_cavity,duodenum
+body,abdominal_cavity,kidneys,kidney_left
+body,abdominal_cavity,aorta_abdominalis
+body,thoracic_cavity,mediastinum,pericardium,aorta_thoracica_pass_pericardium
+body,abdominal_cavity,vci_pass_abdominalis

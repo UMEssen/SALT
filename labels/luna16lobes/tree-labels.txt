@@ -1,0 +1,7 @@
+-
+-
+body,thoracic_cavity,lungs,lung_right,lung_upper_lobe_right
+body,thoracic_cavity,lungs,lung_right,lung_middle_lobe_right
+body,thoracic_cavity,lungs,lung_right,lung_lower_lobe_right
+body,thoracic_cavity,lungs,lung_left,lung_upper_lobe_left
+body,thoracic_cavity,lungs,lung_left,lung_lower_lobe_left

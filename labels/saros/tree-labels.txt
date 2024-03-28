@@ -1,0 +1,14 @@
+background
+body,subcutaneous_tissue
+body,muscles
+body,abdominal_cavity
+body,thoracic_cavity
+body,bones
+-
+body,thoracic_cavity,mediastinum,pericardium
+-
+body,thoracic_cavity,mediastinum
+body,brain
+body,spinal_cord
+-
+-

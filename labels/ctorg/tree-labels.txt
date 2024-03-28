@@ -1,0 +1,7 @@
+-
+body,abdominal_cavity,liver
+body,abdominal_cavity,urinary_bladder
+body,thoracic_cavity,lungs
+body,abdominal_cavity,kidneys
+body,bones
+body,brain
