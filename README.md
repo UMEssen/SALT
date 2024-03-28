@@ -6,9 +6,7 @@ In our case, we applied this to medical imaging and provide the segmentation of 
 
 The model is very fast (average of 35 seconds for a 1000 whole body!) and can segment 113 body regions in a single pass.
 
-![CT scan](https://github.com/UMEssen/SALT/blob/main/images/ct.gif)
-![Segmentation](https://github.com/UMEssen/SALT/blob/main/images/seg.gif)
-
+![Segmentation](https://github.com/UMEssen/SALT/blob/main/images/segmentation.gif)
 
 ## Training
 
