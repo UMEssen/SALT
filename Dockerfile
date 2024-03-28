@@ -9,6 +9,8 @@ RUN python3 -m poetry export --without-hashes -f requirements.txt \
 
 FROM nvcr.io/nvidia/pytorch:22.12-py3
 
+ENV MPLCONFIGDIR=/tmp
+
 COPY --from=poetry2requirements /Requirements.txt /tmp
 
 WORKDIR /app
