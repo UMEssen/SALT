@@ -4,6 +4,12 @@ This segmentation framework was developed at the Institute for AI in Medicine of
 The framework can be used for any 2D or 3D segmentation task that exhibits a hierarchical labels structure.
 In our case, we applied this to medical imaging and provide the segmentation of 145 different structures in the human body.
 
+The model is very fast (average of 35 seconds for a 1000 whole body!) and can segment 113 body regions in a single pass.
+
+![CT scan](https://github.com/UMEssen/SALT/blob/main/images/ct.mp4)
+![Segmentation](https://github.com/UMEssen/SALT/blob/main/images/seg.mp4)
+
+
 ## Training
 
 ### Datasets
@@ -56,12 +62,13 @@ docker build -t shipai/salt .
 
 and then run the container with
 ```bash
-docker run -it -rm \
+docker run -it --rm \
        --runtime=nvidia \
        --network host \
        --user $(id -u):$(id -g) \
        --shm-size=8g --ulimit memlock=-1 --ulimit stack=67108864 \
-       -v /path/to/data:/storage \
+       -v /path/to/storage:/storage \
+       -e NVIDIA_VISIBLE_DEVICES=0,1,2 \
        shipai/salt
 ```
 
@@ -85,6 +92,23 @@ python -m salt.export \
 
 ## Evaluation
 
+You can build the docker image with
+```bash
+docker build -t shipai/salt .
+```
+
+and then run the container with
+```bash
+docker run -it --rm \
+       --runtime=nvidia \
+       --network host \
+       --user $(id -u):$(id -g) \
+       --shm-size=8g --ulimit memlock=-1 --ulimit stack=67108864 \
+       -v /path/to/storage:/storage \
+       -e NVIDIA_VISIBLE_DEVICES=0,1,2 \
+       shipai/salt
+```
+
 Once the container is running, you can compute the predictions for your dataset:
 ```bash
 python -m salt.predict \
@@ -95,3 +119,13 @@ python -m salt.predict \
 ```
 
 Note that for the predictions, the data does not need to be in a particular format, and any folder containing NIfTI files can be used as input.
+
+If your dataset has a ground truth, you can evaluate the predictions from outside the container using:
+
+```bash
+poetry run python -m salt.classic_evaluate \
+       --config-file /path/to/the/model/config.pkl \
+       --data-dir /path/to/the/data \
+       --predictions-dir /path/to/the/predictions \
+       --output-dir /path/for/results
+```
