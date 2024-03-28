@@ -1,7 +1,7 @@
 # Softmax for Arbitrary Label Trees (SALT)
 
 This segmentation framework was developed at the Institute for AI in Medicine of the University Hospital Essen by the [SHIP-AI team](https://ship-ai.ikim.nrw/).
-The framework could be used for any 2D or 3D segmentation task that requires a hierarchical structure of the labels.
+The framework can be used for any 2D or 3D segmentation task that exhibits a hierarchical labels structure.
 In our case, we applied this to medical imaging and provide the segmentation of 145 different structures in the human body.
 
 ## Training
