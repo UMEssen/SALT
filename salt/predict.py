@@ -48,12 +48,14 @@ def main(args: Namespace) -> None:
     pre_processing = get_validation_transforms(
         spacing=config["model"]["voxel_spacing"],
         info=None,
-        intensity_properties=IntensityProperties(
-            mean=config["intensity_properties"]["mean"],
-            std=config["intensity_properties"]["std"],
-        )
-        if config["intensity_properties"] is not None
-        else None,
+        intensity_properties=(
+            IntensityProperties(
+                mean=config["intensity_properties"]["mean"],
+                std=config["intensity_properties"]["std"],
+            )
+            if config["intensity_properties"] is not None
+            else None
+        ),
     )
     model.cuda()
     model.eval()
@@ -84,10 +86,12 @@ def main(args: Namespace) -> None:
                     progress=True,
                     overlap=0.5,
                     mode="gaussian",
-                    cval=(-1024 - config["intensity_properties"]["mean"])
-                    / config["intensity_properties"]["std"]
-                    if config["intensity_properties"] is not None
-                    else 0.0,
+                    cval=(
+                        (-1024 - config["intensity_properties"]["mean"])
+                        / config["intensity_properties"]["std"]
+                        if config["intensity_properties"] is not None
+                        else 0.0
+                    ),
                     reduction_fn=partial(
                         argmax_leaves, adjacency_matrix=config["adjacency_matrix"]
                     ),
@@ -111,8 +115,16 @@ def main(args: Namespace) -> None:
 
 if __name__ == "__main__":
     parser = ArgumentParser()
-    parser.add_argument("--model-file", type=Path, required=True)
-    parser.add_argument("--config-file", type=Path, required=True)
+    parser.add_argument(
+        "--model-file",
+        type=Path,
+        default=Path("models/foobar-31/model.pt"),
+    )
+    parser.add_argument(
+        "--config-file",
+        type=Path,
+        default=Path("models/foobar-31/config.pkl"),
+    )
     parser.add_argument("--data-dir", type=Path)
     parser.add_argument("--output_dir", type=Path)
     args = parser.parse_args()

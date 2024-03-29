@@ -16,6 +16,7 @@ COPY --from=poetry2requirements /Requirements.txt /tmp
 WORKDIR /app
 
 COPY salt /app/salt
+COPY models /app/models
 
 RUN cat /tmp/Requirements.txt
 
