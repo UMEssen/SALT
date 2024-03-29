@@ -88,7 +88,7 @@ python -m salt.export \
        --output-dir /storage/models/exports/your-model-name
 ```
 
-## Evaluation
+## Prediction & Evaluation
 
 You can build the docker image with
 ```bash
@@ -107,7 +107,15 @@ docker run -it --rm \
        shipai/salt
 ```
 
-Once the container is running, you can compute the predictions for your dataset:
+Once the container is running, you can compute the predictions for your dataset using our model
+```bash
+python -m salt.predict \
+       --data-dir /storage/datasets/data/dataset-name/images \
+       --output_dir /storage/results/your-model-name/dataset-name
+```
+
+or run it with your newly trained model
+
 ```bash
 python -m salt.predict \
        --model-file /storage/models/exports/your-model-name/model.pt \
