@@ -1,4 +1,13 @@
-# Softmax for Arbitrary Label Trees (SALT)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="https://github.com/UMEssen/SALT">
+    <img src="https://raw.githubusercontent.com/UMEssen/SALT/main/images/salt.png" alt="Logo" width="300">
+  </a>
+  # Softmax for Arbitrary Label Trees
+</div>
 
 This segmentation framework was developed at the Institute for AI in Medicine of the University Hospital Essen by the [SHIP-AI team](https://ship-ai.ikim.nrw/).
 The framework can be used for any 2D or 3D segmentation task that exhibits a hierarchical labels structure.
