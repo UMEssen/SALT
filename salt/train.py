@@ -183,7 +183,6 @@ class TrainingModel(torch.nn.Module):
 
         # Sink class loss
         yhat_bm = torch.index_select(
-            # TODO: Changed to yhat_pred with masking, does this make sense?
             self.bitmask_classes.to(y.device),
             0,
             yhat_pred[valid_mask],
@@ -640,10 +639,12 @@ def main(args: argparse.Namespace) -> None:
                         roi_size=roi_size,
                         batch_size=args.batch_size,
                         gpus=args.gpus,
-                        cval=(-1024 - data_module.intensity_properties.mean)
-                        / data_module.intensity_properties.std
-                        if data_module.intensity_properties is not None
-                        else 0.0,
+                        cval=(
+                            (-1024 - data_module.intensity_properties.mean)
+                            / data_module.intensity_properties.std
+                            if data_module.intensity_properties is not None
+                            else 0.0
+                        ),
                     )
 
                 epoch_cm += cm_update.cpu().sum(0)
