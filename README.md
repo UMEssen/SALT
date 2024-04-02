@@ -5,7 +5,7 @@
 <div align="center">
   
   <a href="https://github.com/UMEssen/SALT">
-    <img src="https://raw.githubusercontent.com/UMEssen/SALT/main/images/salt.png" alt="Logo" width="300">
+    <img src="https://raw.githubusercontent.com/UMEssen/SALT/main/images/salt.png" alt="Logo" height="300">
   </a>
   <h1>Softmax for Arbitrary Label Trees</h1>
 </div>
