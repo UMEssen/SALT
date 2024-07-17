@@ -18,6 +18,14 @@ The model is very fast (average of 35 seconds for a 1000 whole body!) and can se
 
 ![Segmentation](https://github.com/UMEssen/SALT/blob/main/images/segmentation.gif)
 
+## Preprint & Paper
+
+You can find the preprint of our paper on [here](https://arxiv.org/abs/2407.08878). If you use SALT please cite the tool as following:
+
+```
+Sven Koitka, Giulia Baldini, Cynthia S. Schmidt, Olivia B. Pollok, Obioma Pelka, Judith Kohnke, Katarzyna Borys, Christoph M. Friedrich, Benedikt M. Schaarschmidt, Michael Forsting, Lale Umutlu, Johannes Haubold, Felix Nensa, & René Hosch. (2024). SALT: Introducing a Framework for Hierarchical Segmentations in Medical Imaging using Softmax for Arbitrary Label Trees.
+```
+
 ## Training
 
 ### Datasets
