@@ -2,7 +2,7 @@
 
 <!-- PROJECT LOGO -->
 
-![alt text](images/SALT-banner.png "BOA Profiles Banner")
+![SALT-Banner](https://github.com/UMEssen/SALT/blob/main/images/SALT-banner.png)
 
 # Softmax for Arbitrary Label Trees
 

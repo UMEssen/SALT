@@ -133,6 +133,6 @@ dmypy.json
 *.nii.gz
 *.csv
 wandb/
-*.png
+#*.png
 *.out
 .DS_Store
