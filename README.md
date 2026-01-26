@@ -4,24 +4,24 @@
 
 ![SALT-Banner](https://github.com/UMEssen/SALT/blob/main/images/SALT-banner.png)
 
+## Preprint & Paper
+
+You can find the published version of our paper in Nature Scientific Reports [here](https://www.nature.com/articles/s41598-025-31639-1). If you use SALT, please cite the tool as follows:
+
+```
+Becker, S.S., Baldini, G., Schmidt, C.S. et al. SALT: Introducing a framework for hierarchical segmentations in medical imaging using label trees. Sci Rep 15, 44140 (2025). https://doi.org/10.1038/s41598-025-31639-1
+```
+
 # Softmax for Arbitrary Label Trees
 
 
 This segmentation framework was developed at the Institute for AI in Medicine of the University Hospital Essen by the [SHIP.AI](https://ship-ai.ikim.nrw/) team.
-The framework can be used for any 2D or 3D segmentation task that exhibits a hierarchical labels structure.
-In our case, we applied this to medical imaging and provide the segmentation of 145 different structures in the human body.
+The framework can be used for any 2D or 3D segmentation task that exhibits a hierarchical label structure.
+In our case, we applied this to medical imaging and provided the segmentation of 145 different structures in the human body.
 
-The model is very fast (average of 35 seconds for a 1000 whole body!) and can segment 113 body regions in a single pass.
+The model is very fast (averaging 35 seconds for a 1000 whole-body!) and can segment 113 body regions in a single pass.
 
 ![Segmentation](https://github.com/UMEssen/SALT/blob/main/images/segmentation.gif)
-
-## Preprint & Paper
-
-You can find the preprint of our paper on [here](https://arxiv.org/abs/2407.08878). If you use SALT please cite the tool as following:
-
-```
-Sven Koitka, Giulia Baldini, Cynthia S. Schmidt, Olivia B. Pollok, Obioma Pelka, Judith Kohnke, Katarzyna Borys, Christoph M. Friedrich, Benedikt M. Schaarschmidt, Michael Forsting, Lale Umutlu, Johannes Haubold, Felix Nensa, & René Hosch. (2024). SALT: Introducing a Framework for Hierarchical Segmentations in Medical Imaging using Softmax for Arbitrary Label Trees.
-```
 
 ## Training
 
@@ -62,9 +62,9 @@ data/
 │   │   ├── labels
 ```
 
-The datasets do not need to have all three `train`, `val`, and `test` folders, and may only include a `test` set.
+The datasets do not need to include all three `train`, `val`, and `test` folders; they may only include a `test` set.
 
-The files `labels.txt` and `tree-labels.txt` specify the labels from the dataset. `labels.txt` should contain the label names, while `tree-labels.txt` should define the hierarchical structure of the labels from the tree. In the [labels](./labels) folder, you can find some examples for these files, and in the [conversion](salt/data/conversion) you can find examples on how the data was converted to this format.
+The files `labels.txt` and `tree-labels.txt` contain the dataset's labels. `labels.txt` should contain the label names, while `tree-labels.txt` should define the hierarchical structure of the labels from the tree. In the [labels](./labels) folder, you can find examples of these files, and in the [conversion](salt/data/conversion) folder, you can find examples of how the data was converted to this format.
 
 
 ### Train
