@@ -4,7 +4,7 @@
 
 ![SALT-Banner](https://github.com/UMEssen/SALT/blob/main/images/SALT-banner.png)
 
-## Preprint & Paper
+# Paper
 
 You can find the published version of our paper in Nature Scientific Reports [here](https://www.nature.com/articles/s41598-025-31639-1). If you use SALT, please cite the tool as follows:
 
