@@ -2,7 +2,7 @@
 
 <!-- PROJECT LOGO -->
 
-![SALT-Banner](https://github.com/UMEssen/SALT/blob/main/images/SALT-banner.png)
+![SALT-Banner](https://github.com/UMEssen/SALT/blob/main/images/SALT.png)
 
 # Paper
 
