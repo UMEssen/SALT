@@ -20,20 +20,20 @@ from salt.utils.inference import sliding_window_inference_with_reduction
 logger = logging.getLogger(__name__)
 
 
-def argmax_leaves(
+def argmax_leafs(
     inputs: torch.Tensor,
     adjacency_matrix: np.ndarray,
     dim: int = 1,
     pruned: bool = True,
 ) -> torch.Tensor:
-    leave_nodes = np.where(adjacency_matrix[1:, 1:].sum(axis=1) == 0)[0]
+    leaf_nodes = np.where(adjacency_matrix[1:, 1:].sum(axis=1) == 0)[0]
     indices = np.arange(adjacency_matrix.shape[0] - 1, dtype=np.int32)
-    indices = indices[leave_nodes]
-    y_pred_leaves = inputs[:, leave_nodes]
-    y_pred_leave_idx = torch.argmax(y_pred_leaves, axis=dim)
+    indices = indices[leaf_nodes]
+    y_pred_leafs = inputs[:, leaf_nodes]
+    y_pred_leaf_idx = torch.argmax(y_pred_leafs, axis=dim)
     if pruned:
-        return y_pred_leave_idx
-    return torch.tensor(indices).to(inputs.device)[y_pred_leave_idx]
+        return y_pred_leaf_idx
+    return torch.tensor(indices).to(inputs.device)[y_pred_leaf_idx]
 
 
 def main(args: Namespace) -> None:
@@ -93,7 +93,7 @@ def main(args: Namespace) -> None:
                         else 0.0
                     ),
                     reduction_fn=partial(
-                        argmax_leaves, adjacency_matrix=config["adjacency_matrix"]
+                        argmax_leafs, adjacency_matrix=config["adjacency_matrix"]
                     ),
                     # device="cpu",
                 )

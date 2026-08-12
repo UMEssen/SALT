@@ -11,6 +11,17 @@ from salt.core.adjacency_matrix import (
 
 
 class TreeSoftmax(nn.Module):
+    '''SALT's core: A softmax layer that acts on siblings in a label tree.
+    This means that it does the normal e^xi / sum(e^xj) operation, but only for
+    xj that are siblings of xi. The tree structure is defined by the adjacency
+    matrix.
+
+    The forward() method additionally propagates probabilities from parent to
+    child nodes by default, multiplying the probabilities of the parents on
+    their children (after the above softmax).  That option effectively causes
+    each output node to carry a joint probability that can be used directly.
+    '''
+
     def __init__(self, adjacency_matrix: np.ndarray, dim: int = 1) -> None:
         # Has to be symmetric matrix
         assert adjacency_matrix.ndim == 2

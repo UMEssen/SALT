@@ -96,13 +96,13 @@ class LabelTree:
         return self._adjacency_matrix.copy()
 
     @property
-    def leave_indices(self) -> List[int]:
+    def leaf_indices(self) -> List[int]:
         row_sums = self._adjacency_matrix.sum(axis=1)
         return list(np.where(row_sums == 0)[0])
 
     @property
-    def leave_names(self) -> List[Tuple[str, ...]]:
-        return [self._vocabulary[i] for i in self.leave_indices]
+    def leaf_names(self) -> List[Tuple[str, ...]]:
+        return [self._vocabulary[i] for i in self.leaf_indices]
 
     @property
     def labels(self) -> List[Tuple[str, ...]]:

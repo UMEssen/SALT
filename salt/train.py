@@ -57,7 +57,7 @@ class TrainingModel(torch.nn.Module):
         images: torch.Tensor,
         targets: torch.Tensor,
         masks: torch.Tensor,
-    ) -> torch.Tensor:
+    ) -> Tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
         yhats = self.base_model(images)
         is_deep_supervision = len(yhats.shape) == 6
         if is_deep_supervision:
@@ -66,7 +66,7 @@ class TrainingModel(torch.nn.Module):
             yhats = self.activation_fn(yhats, dim=1)
 
         with torch.no_grad():
-            yhat_preds = self._argmax_leaves(yhats, dim=2 if is_deep_supervision else 1)
+            yhat_preds = self._argmax_leafs(yhats, dim=2 if is_deep_supervision else 1)
 
         if is_deep_supervision:
             loss = torch.stack(
@@ -83,12 +83,12 @@ class TrainingModel(torch.nn.Module):
                                 )
                             )
                             for ds_idx, (yhat_ds, yhat_pred_ds) in enumerate(
-                                zip(yhats.unbind(0), yhat_preds.unbind(0))
+                                zip(yhat.unbind(0), yhat_pred.unbind(0))
                             )
                         ],
                         dim=0,
                     ).sum(0)
-                    for yhats, yhat_preds, target, mask in zip(
+                    for yhat, yhat_pred, target, mask in zip(
                         yhats, yhat_preds, targets, masks
                     )
                 ]
@@ -151,7 +151,7 @@ class TrainingModel(torch.nn.Module):
             ),  # self.base_model,
             overlap=0.25,
             cval=cval,
-            reduction_fn=self._argmax_leaves,
+            reduction_fn=self._argmax_leafs,
         ).to(
             torch.int32
         )  # HACK MONAI casts to float???
@@ -331,24 +331,24 @@ class TrainingModel(torch.nn.Module):
         assert comp.ndim == 2
         return torch.all(comp, axis=1)
 
-    def _argmax_leaves(
+    def _argmax_leafs(
         self, yhat: torch.Tensor, dim: int = 1, inplace: bool = False
     ) -> torch.Tensor:
         assert dim in {1, 2}
-        leave_nodes = np.where(self.adjacency_matrix[1:, 1:].sum(axis=1) == 0)[0]
+        leaf_nodes = np.where(self.adjacency_matrix[1:, 1:].sum(axis=1) == 0)[0]
 
         if inplace:
             if dim == 1:
-                yhat[:, ~leave_nodes] = 0.0
+                yhat[:, ~leaf_nodes] = 0.0
             else:
-                yhat[:, :, ~leave_nodes] = 0.0
+                yhat[:, :, ~leaf_nodes] = 0.0
             return torch.argmax(yhat, axis=dim)
 
         indices = np.arange(self.num_classes, dtype=np.int32)
-        indices = indices[leave_nodes]
-        y_pred_leaves = yhat[:, leave_nodes] if dim == 1 else yhat[:, :, leave_nodes]
-        y_pred_leave_idx = torch.argmax(y_pred_leaves, axis=dim)
-        return torch.tensor(indices).to(yhat.device)[y_pred_leave_idx]
+        indices = indices[leaf_nodes]
+        y_pred_leafs = yhat[:, leaf_nodes] if dim == 1 else yhat[:, :, leaf_nodes]
+        y_pred_leaf_idx = torch.argmax(y_pred_leafs, axis=dim)
+        return torch.tensor(indices).to(yhat.device)[y_pred_leaf_idx]
 
 
 def blend_images(
@@ -457,7 +457,7 @@ def main(args: argparse.Namespace) -> None:
     with (args.train_dir / "itksnap_labels.txt").open("w") as ofile:
         ofile.write(create_itksnap_label_definition(data_config.labels))
     with (args.train_dir / "itksnap_labels_pruned.txt").open("w") as ofile:
-        ofile.write(create_itksnap_label_definition(data_config.leave_labels))
+        ofile.write(create_itksnap_label_definition(data_config.leaf_labels))
     with (args.train_dir / "config.pkl").open("wb") as ofile:
         pickle.dump(
             {

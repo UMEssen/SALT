@@ -49,13 +49,13 @@ class HierarchyAwareDiceLoss(_Loss):
         assert comp.ndim == 2
         return torch.all(comp, axis=1)
 
-    def _argmax_leaves(self, yhat: torch.Tensor) -> torch.Tensor:
-        leave_nodes = np.where(self.adjacency_matrix[1:, 1:].sum(axis=1) == 0)[0]
+    def _argmax_leafs(self, yhat: torch.Tensor) -> torch.Tensor:
+        leaf_nodes = np.where(self.adjacency_matrix[1:, 1:].sum(axis=1) == 0)[0]
         indices = np.arange(self.adjacency_matrix.shape[0] - 1, dtype=np.int32)
-        indices = indices[leave_nodes]
-        y_pred_leaves = yhat[:, leave_nodes]
-        y_pred_leave_idx = torch.argmax(y_pred_leaves, axis=1)
-        return torch.tensor(indices).to(yhat.device)[y_pred_leave_idx]
+        indices = indices[leaf_nodes]
+        y_pred_leafs = yhat[:, leaf_nodes]
+        y_pred_leaf_idx = torch.argmax(y_pred_leafs, axis=1)
+        return torch.tensor(indices).to(yhat.device)[y_pred_leaf_idx]
 
     def forward(
         self, input: torch.Tensor, target: torch.Tensor, class_mask: torch.Tensor
@@ -69,8 +69,8 @@ class HierarchyAwareDiceLoss(_Loss):
         bg = self.bitmask_groups.to(input.device)
         class_indices = torch.nonzero(class_mask)[:, 0]
 
-        # Compute leave predictions and convert to bitmask
-        pred = self._argmax_leaves(input.detach())
+        # Compute leaf predictions and convert to bitmask
+        pred = self._argmax_leafs(input.detach())
         yhat_bm = torch.index_select(bc, 0, pred)
 
         # Compute masks based on adjacency matrix
@@ -80,14 +80,17 @@ class HierarchyAwareDiceLoss(_Loss):
         computed_masks: Dict[int, torch.Tensor] = {}
         class_indices_np = class_indices.cpu().numpy().ravel()
         for class_idx in class_indices_np:
-            parent_idx = self.adjacency_matrix[:, class_idx + 1].argmax()
+            parent_idx: int = self.adjacency_matrix[:, class_idx + 1].argmax()  # type: ignore
 
             if parent_idx == 0:
                 sub_input = input[:, class_idx]
                 sub_target = target[:, class_idx]
             else:
+                # computed_masks are cached in case other labels have the same parent
                 if parent_idx not in computed_masks:
                     if parent_idx - 1 in class_indices_np:
+                        # this dataset should give full information about the parent
+                        # (all children are in its label set)
                         computed_masks[parent_idx] = target[:, parent_idx - 1].bool()
                     else:
                         computed_masks[parent_idx] = self._bitwise_mask_equal(

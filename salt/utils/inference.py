@@ -147,7 +147,7 @@ def sliding_window_inference_with_reduction(  # noqa: C901
         outer_indices.append(image_size[outer_dim] - roi_size_safe[outer_dim])
     last_outer_dim_idx = -1
     for outer_idx, outer_dim_idx in enumerate(
-        tqdm(outer_indices, leave=True, position=0) if progress else outer_indices
+        tqdm(outer_indices, leaf=True, position=0) if progress else outer_indices
     ):
         # Move old probabilities and weights based on the actual step size of this slab
         if outer_idx > 0:
@@ -199,7 +199,7 @@ def sliding_window_inference_with_reduction(  # noqa: C901
         # Perform sliding window inference on slab
         slice_indices = list(range(0, total_slices, sw_batch_size))
         for slice_idx in (
-            tqdm(slice_indices, leave=False, position=1) if progress else slice_indices
+            tqdm(slice_indices, leaf=False, position=1) if progress else slice_indices
         ):
             # Get crops from slices
             slice_range = range(slice_idx, min(slice_idx + sw_batch_size, total_slices))
